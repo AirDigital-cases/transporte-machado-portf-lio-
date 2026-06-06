@@ -126,7 +126,6 @@ function MachadoHero({ featuredVideo }) {
           className="grid gap-4"
         >
           <div className="relative overflow-hidden rounded-[30px] border border-white/10 bg-[#121212] shadow-panel">
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent" />
             <SafeVideo
               className="h-full min-h-[360px] w-full object-cover"
               autoPlay
@@ -137,23 +136,6 @@ function MachadoHero({ featuredVideo }) {
               fallbackSrc={featuredVideo.fallbackSrc}
               poster={featuredVideo.poster}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
-            <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/45 px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-red-200 backdrop-blur-md">
-              Operacao real
-            </div>
-            <div className="absolute bottom-4 left-4 right-4 rounded-[24px] border border-white/10 bg-black/55 p-4 backdrop-blur-xl">
-              <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-end">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{featuredVideo.category}</p>
-                  <h2 className="mt-3 text-2xl font-semibold text-white sm:text-3xl">{featuredVideo.title}</h2>
-                  <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{featuredVideo.note}</p>
-                </div>
-                <div className="rounded-[22px] border border-white/10 bg-white/[0.05] px-4 py-4 sm:text-right">
-                  <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">Especialidades</p>
-                  <p className="mt-2 text-sm font-medium leading-6 text-white">Carga fechada, carga fracionada e logistica regional</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-3">
