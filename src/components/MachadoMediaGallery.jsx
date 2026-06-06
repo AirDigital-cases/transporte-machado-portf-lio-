@@ -8,8 +8,28 @@ const galleryFocus = [
   'Entregas com seguranca e precisao',
 ]
 
-function isVideo(media) {
-  return media?.kind === 'video' || media?.src?.endsWith('.mp4')
+function getMediaDescription(media) {
+  return media?.description ?? media?.note ?? ''
+}
+
+function getMediaThumbnail(media) {
+  return media?.thumbnail ?? media?.poster ?? media?.src
+}
+
+function isPlaceholderPhoto(src) {
+  return typeof src === 'string' && src.endsWith('placeholder.svg')
+}
+
+function formatVideoDuration(seconds) {
+  if (!Number.isFinite(seconds) || seconds <= 0) {
+    return null
+  }
+
+  const totalSeconds = Math.round(seconds)
+  const minutes = Math.floor(totalSeconds / 60)
+  const remainingSeconds = totalSeconds % 60
+
+  return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`
 }
 
 function SafeVideoPlayer({ src, fallbackSrc, poster, className, ...props }) {
@@ -38,13 +58,42 @@ function SafeVideoPlayer({ src, fallbackSrc, poster, className, ...props }) {
 }
 
 function MachadoMediaGallery({ videos, photos }) {
-  const [activeMedia, setActiveMedia] = useState(videos[0] ?? photos[0] ?? null)
+  const [activeVideoId, setActiveVideoId] = useState(videos[0]?.id ?? null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [durations, setDurations] = useState({})
 
-  const mediaGroups = [
-    { title: 'Vídeos', items: videos },
-    { title: 'Fotos', items: photos },
-  ]
+  useEffect(() => {
+    if (videos.length === 0) {
+      setActiveVideoId(null)
+      return
+    }
+
+    if (!videos.some((video) => video.id === activeVideoId)) {
+      setActiveVideoId(videos[0].id)
+    }
+  }, [activeVideoId, videos])
+
+  const activeVideo = videos.find((video) => video.id === activeVideoId) ?? videos[0] ?? null
+  const visiblePhotos = photos.filter((photo) => !isPlaceholderPhoto(photo.src))
+
+  function handleVideoMetadata(videoId, event) {
+    const formattedDuration = formatVideoDuration(event.currentTarget.duration)
+
+    if (!formattedDuration) {
+      return
+    }
+
+    setDurations((currentDurations) => {
+      if (currentDurations[videoId] === formattedDuration) {
+        return currentDurations
+      }
+
+      return {
+        ...currentDurations,
+        [videoId]: formattedDuration,
+      }
+    })
+  }
 
   return (
     <section
@@ -56,118 +105,135 @@ function MachadoMediaGallery({ videos, photos }) {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Portfólio de mídia</p>
-            <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-              Nossa operacao em movimento
-            </h2>
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl">
+                Nossa operacao em movimento
+              </h2>
+              <span className="rounded-full border border-white/10 bg-black/35 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-300">
+                {videos.length} videos disponiveis
+              </span>
+            </div>
           </div>
           <p className="max-w-2xl text-sm leading-6 text-slate-400">
-            Fotos e videos reais da rotina Machado: frota, equipe, armazenagem, movimentacao de cargas e entregas. Cada registro mostra a estrutura, o cuidado e a precisao que sustentam nossas operacoes.
+            Selecione um video da lista para trocar imediatamente a exibicao principal, o titulo, a descricao e a thumb da operacao em destaque.
           </p>
         </div>
 
-        <div className="relative mt-8 grid gap-6 xl:grid-cols-[1.08fr_0.92fr]">
-          <div className="rounded-[30px] border border-white/10 bg-[#0a0a0a] p-3 shadow-panel sm:p-4">
-            {activeMedia && (
+        <div className="relative mt-8 grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_400px] xl:items-start">
+          <div className="space-y-4">
+            {activeVideo && (
               <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-black">
-                {isVideo(activeMedia) ? (
-                  <SafeVideoPlayer
-                    controls
-                    poster={activeMedia.poster}
-                    src={activeMedia.src}
-                    fallbackSrc={activeMedia.fallbackSrc}
-                    className="aspect-[16/10] w-full object-cover"
-                  />
-                ) : (
-                  <img
-                    src={activeMedia.src}
-                    alt={activeMedia.title}
-                    className="aspect-[16/10] w-full object-cover"
-                  />
-                )}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <SafeVideoPlayer
+                  controls
+                  preload="metadata"
+                  playsInline
+                  poster={activeVideo.poster}
+                  src={activeVideo.src}
+                  fallbackSrc={activeVideo.fallbackSrc}
+                  onLoadedMetadata={(event) => handleVideoMetadata(activeVideo.id, event)}
+                  className="aspect-[16/10] w-full object-cover"
+                />
                 <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/45 px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-red-200 backdrop-blur-md">
-                  {isVideo(activeMedia) ? 'Video em destaque' : 'Foto em destaque'}
+                  Galeria de videos
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(true)}
                   className="absolute right-4 top-4 rounded-full border border-white/10 bg-black/45 px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-white backdrop-blur-md hover:bg-black/65"
                 >
-                  {isVideo(activeMedia) ? 'Assistir video' : 'Expandir'}
+                  Expandir
                 </button>
-                <div className="absolute bottom-4 left-4 right-4 rounded-[22px] border border-white/10 bg-black/55 p-4 backdrop-blur-xl">
-                  <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{activeMedia.category}</p>
-                      <h3 className="mt-3 text-2xl font-semibold text-white">{activeMedia.title}</h3>
-                      <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{activeMedia.note}</p>
-                    </div>
-                    <div className="rounded-[18px] border border-white/10 bg-white/[0.05] px-4 py-3 sm:text-right">
-                      <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">Registro</p>
-                      <p className="mt-2 text-sm font-medium text-white">
-                        {isVideo(activeMedia) ? 'Operacao em video' : 'Operacao em imagem'}
-                      </p>
-                    </div>
+              </div>
+            )}
+
+            {activeVideo && (
+              <div className="rounded-[28px] border border-white/10 bg-black/25 p-5 sm:p-6">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] uppercase tracking-[0.28em] text-slate-300">
+                      {activeVideo.category}
+                    </span>
+                    <span className="rounded-full border border-red-500/20 bg-red-500/10 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-red-200">
+                      ● Em reproducao
+                    </span>
                   </div>
+                  <span className="rounded-full border border-white/10 bg-black/35 px-3 py-2 text-[11px] uppercase tracking-[0.28em] text-slate-400">
+                    {durations[activeVideo.id] ?? activeVideo.duration ?? 'Video real'}
+                  </span>
                 </div>
+                <h3 className="mt-4 text-2xl font-semibold text-white sm:text-[30px]">
+                  {activeVideo.title}
+                </h3>
+                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">
+                  {getMediaDescription(activeVideo)}
+                </p>
               </div>
             )}
           </div>
 
-          <div className="grid gap-4">
-            {mediaGroups.map((group) => (
-              <div key={group.title} className="rounded-[28px] border border-white/10 bg-white/[0.04] p-4">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm uppercase tracking-[0.3em] text-machado-red">{group.title}</p>
-                  <span className="rounded-full border border-white/10 bg-black/30 px-3 py-2 text-[10px] uppercase tracking-[0.28em] text-slate-400">
-                    {group.items.length} itens
-                  </span>
-                </div>
-                <div className="mt-4 grid gap-3">
-                  {group.items.map((item) => {
-                    const selected = activeMedia?.id === item.id
-
-                    return (
-                      <motion.button
-                        key={item.id}
-                        type="button"
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
-                        onClick={() => setActiveMedia(item)}
-                        className={`grid gap-4 rounded-[22px] border p-3 text-left transition hover:-translate-y-0.5 sm:grid-cols-[96px_1fr] sm:items-center ${
-                          selected
-                            ? 'border-red-500/35 bg-red-500/10'
-                            : 'border-white/10 bg-black/25 hover:border-white/20 hover:bg-white/[0.05]'
-                        }`}
-                      >
-                        <div className="relative h-24 overflow-hidden rounded-[18px] border border-white/10 bg-[#0a0a0a]">
-                          <img
-                            src={item.poster ?? item.src}
-                            alt={item.title}
-                            className="h-full w-full object-cover"
-                          />
-                          {isVideo(item) && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-black/35">
-                              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-sm text-white backdrop-blur-md">
-                                ▶
-                              </span>
-                            </div>
-                          )}
-                        </div>
-                        <div className="min-w-0">
-                          <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">{item.category}</p>
-                          <p className="mt-2 text-sm font-semibold text-white">{item.title}</p>
-                          <p className="mt-2 text-xs leading-5 text-slate-400">{item.note}</p>
-                          <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-red-200">
-                            {isVideo(item) ? 'Assistir video' : 'Ver imagem'}
-                          </p>
-                        </div>
-                      </motion.button>
-                    )
-                  })}
-                </div>
+          <div className="rounded-[28px] border border-white/10 bg-white/[0.04] p-4 sm:p-5">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Videos</p>
+                <p className="mt-2 text-sm text-slate-400">Selecione um item para trocar o destaque.</p>
               </div>
-            ))}
+              <span className="rounded-full border border-white/10 bg-black/30 px-3 py-2 text-[10px] uppercase tracking-[0.28em] text-slate-300">
+                {videos.length} videos disponiveis
+              </span>
+            </div>
+            <div className="mt-4 grid gap-3">
+              {videos.map((video) => {
+                const selected = activeVideo?.id === video.id
+                const duration = durations[video.id] ?? video.duration
+
+                return (
+                  <motion.button
+                    key={video.id}
+                    type="button"
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                    onClick={() => setActiveVideoId(video.id)}
+                    className={`grid gap-4 rounded-[22px] border p-3 text-left transition hover:-translate-y-0.5 sm:grid-cols-[116px_1fr] sm:items-center ${
+                      selected
+                        ? 'border-red-500/35 bg-red-500/10'
+                        : 'border-white/10 bg-black/25 hover:border-white/20 hover:bg-white/[0.05]'
+                    }`}
+                  >
+                    <div className="relative h-28 overflow-hidden rounded-[18px] border border-white/10 bg-[#0a0a0a]">
+                      <img
+                        src={getMediaThumbnail(video)}
+                        alt={video.title}
+                        className="h-full w-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                      <span className="absolute bottom-3 left-3 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 text-sm text-white backdrop-blur-md">
+                        ▶
+                      </span>
+                      {duration && (
+                        <span className="absolute right-3 top-3 rounded-full border border-white/10 bg-black/55 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white">
+                          {duration}
+                        </span>
+                      )}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">{video.category}</p>
+                        {selected && (
+                          <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-red-200">
+                            ● Em reproducao
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-2 text-sm font-semibold text-white sm:text-base">{video.title}</p>
+                      <p className="mt-2 text-xs leading-5 text-slate-400">{getMediaDescription(video)}</p>
+                      <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-red-200">
+                        {selected ? 'Ativo agora' : 'Clique para assistir'}
+                      </p>
+                    </div>
+                  </motion.button>
+                )
+              })}
+            </div>
           </div>
         </div>
 
@@ -179,7 +245,37 @@ function MachadoMediaGallery({ videos, photos }) {
           ))}
         </div>
 
-        {activeMedia && isModalOpen && (
+        {visiblePhotos.length > 0 && (
+          <div className="mt-6 rounded-[28px] border border-white/10 bg-white/[0.03] p-4 sm:p-5">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Fotos</p>
+                <p className="mt-2 text-sm text-slate-400">Registros complementares da operacao Machado.</p>
+              </div>
+              <span className="rounded-full border border-white/10 bg-black/30 px-3 py-2 text-[10px] uppercase tracking-[0.28em] text-slate-300">
+                {visiblePhotos.length} fotos
+              </span>
+            </div>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {visiblePhotos.map((photo) => (
+                <div key={photo.id} className="overflow-hidden rounded-[22px] border border-white/10 bg-black/25">
+                  <img
+                    src={getMediaThumbnail(photo)}
+                    alt={photo.title}
+                    className="aspect-[4/3] w-full object-cover"
+                  />
+                  <div className="space-y-2 p-4">
+                    <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">{photo.category}</p>
+                    <p className="text-sm font-semibold text-white">{photo.title}</p>
+                    <p className="text-xs leading-5 text-slate-400">{getMediaDescription(photo)}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeVideo && isModalOpen && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/88 px-4 py-8 md:p-10"
             onClick={() => setIsModalOpen(false)}
@@ -196,25 +292,19 @@ function MachadoMediaGallery({ videos, photos }) {
                 Fechar
               </button>
               <div className="rounded-3xl bg-[#050505] p-4">
-                {isVideo(activeMedia) ? (
-                  <SafeVideoPlayer
-                    controls
-                    src={activeMedia.src}
-                    fallbackSrc={activeMedia.fallbackSrc}
-                    poster={activeMedia.poster}
-                    className="h-full w-full rounded-3xl bg-black"
-                  />
-                ) : (
-                  <img
-                    src={activeMedia.src}
-                    alt={activeMedia.title}
-                    className="h-full w-full rounded-3xl object-cover"
-                  />
-                )}
+                <SafeVideoPlayer
+                  controls
+                  preload="metadata"
+                  playsInline
+                  src={activeVideo.src}
+                  fallbackSrc={activeVideo.fallbackSrc}
+                  poster={activeVideo.poster}
+                  className="h-full w-full rounded-3xl bg-black"
+                />
               </div>
               <div className="mt-4 text-sm text-slate-300">
-                <p className="font-semibold text-white">{activeMedia.title}</p>
-                <p className="mt-2">{activeMedia.note}</p>
+                <p className="font-semibold text-white">{activeVideo.title}</p>
+                <p className="mt-2">{getMediaDescription(activeVideo)}</p>
               </div>
             </div>
           </div>
