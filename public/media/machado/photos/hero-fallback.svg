@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <rect width="1200" height="675" fill="#111111"/>
+  <g opacity="0.85">
+    <rect x="120" y="120" width="960" height="435" rx="32" fill="#191919"/>
+    <path d="M160 560H1040" stroke="#D3000F" stroke-width="6" stroke-linecap="round"/>
+    <path d="M260 220H940" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+    <path d="M260 300H760" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+    <path d="M260 380H860" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <text x="600" y="360" fill="#fff" font-family="Inter, sans-serif" font-size="56" font-weight="700" text-anchor="middle">Imagem de operação</text>
+</svg>
