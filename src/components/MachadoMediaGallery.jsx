@@ -1,103 +1,191 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
+const galleryFocus = [
+  'Frota e identidade visual',
+  'Pátio, carregamento e docas',
+  'Equipe, processos e bastidores',
+  'Entregas, operação e confiança',
+]
+
+function isVideo(media) {
+  return media?.kind === 'video' || media?.src?.endsWith('.mp4')
+}
+
 function MachadoMediaGallery({ videos, photos }) {
-  const [activeMedia, setActiveMedia] = useState(null)
+  const [activeMedia, setActiveMedia] = useState(videos[0] ?? photos[0] ?? null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const mediaGroups = [
+    { title: 'Vídeos', items: videos },
+    { title: 'Fotos', items: photos },
+  ]
 
   return (
-    <section className="rounded-[32px] border border-white/10 bg-[#131313] p-8 shadow-panel">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Operação em movimento</p>
-          <h2 className="mt-3 text-3xl font-semibold text-white">Galeria de fotos e vídeos</h2>
+    <section
+      id="galeria"
+      className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#131313] p-6 shadow-panel md:p-8"
+    >
+      <div className="absolute inset-0 bg-[linear-gradient(160deg,rgba(255,255,255,0.04),transparent_25%,transparent_72%,rgba(211,0,15,0.08))]" />
+      <div className="relative">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Portfólio de mídia</p>
+            <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">
+              Área de fotos e vídeos com estrutura de showcase, não apenas uma grade de thumbnails.
+            </h2>
+          </div>
+          <p className="max-w-2xl text-sm leading-6 text-slate-400">
+            A galeria agora prioriza um destaque principal, organização por tipo de conteúdo e uma base pronta para receber captações reais da operação.
+          </p>
         </div>
-        <p className="max-w-2xl text-sm leading-6 text-slate-400">
-          Espaço preparado para exibir imagens reais da operação e vídeos da frota em ação.
-        </p>
-      </div>
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {photos.map((photo) => (
-          <motion.button
-            key={photo.id}
-            type="button"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => setActiveMedia(photo)}
-            className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-0 text-left shadow-panel"
-          >
-            <div className="relative h-40 overflow-hidden bg-[#0a0a0a]">
-              <img
-                src={photo.src}
-                alt={photo.title}
-                className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="p-4">
-              <p className="text-sm font-semibold text-white">{photo.title}</p>
-              <p className="mt-2 text-xs text-slate-400">Clique para ampliar</p>
-            </div>
-          </motion.button>
-        ))}
-        {videos.map((video) => (
-          <motion.button
-            key={video.id}
-            type="button"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => setActiveMedia(video)}
-            className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-0 text-left shadow-panel"
-          >
-            <div className="relative h-40 overflow-hidden bg-[#0a0a0a]">
-              <img
-                src={video.poster}
-                alt={video.title}
-                className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur-sm">
-                  ▶ Vídeo
-                </span>
-              </div>
-            </div>
-            <div className="p-4">
-              <p className="text-sm font-semibold text-white">{video.title}</p>
-              <p className="mt-2 text-xs text-slate-400">Clique para reproduzir</p>
-            </div>
-          </motion.button>
-        ))}
-      </div>
 
-      {activeMedia && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 px-4 py-8 md:p-10">
-          <div className="relative w-full max-w-4xl rounded-[28px] border border-white/10 bg-[#0d0d0d] p-5 shadow-2xl">
-            <button
-              type="button"
-              onClick={() => setActiveMedia(null)}
-              className="absolute right-5 top-5 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-white transition hover:bg-white/10"
-            >
-              Fechar
-            </button>
-            <div className="rounded-3xl bg-[#050505] p-4">
-              {activeMedia.src && activeMedia.src.endsWith('.mp4') ? (
-                <video controls className="h-full w-full rounded-3xl bg-black">
-                  <source src={activeMedia.src} type="video/mp4" />
-                  Seu navegador não suporta reprodução de vídeo.
-                </video>
-              ) : (
-                <img
-                  src={activeMedia.src}
-                  alt={activeMedia.title}
-                  className="h-full w-full rounded-3xl object-cover"
-                />
-              )}
-            </div>
-            <div className="mt-4 text-sm text-slate-300">
-              <p className="font-semibold text-white">{activeMedia.title}</p>
-              <p className="mt-2">Clique fora para retornar à galeria.</p>
-            </div>
+        <div className="relative mt-8 grid gap-6 xl:grid-cols-[1.08fr_0.92fr]">
+          <div className="rounded-[30px] border border-white/10 bg-[#0a0a0a] p-3 shadow-panel sm:p-4">
+            {activeMedia && (
+              <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-black">
+                {isVideo(activeMedia) ? (
+                  <video controls poster={activeMedia.poster} className="aspect-[16/10] w-full object-cover">
+                    <source src={activeMedia.src} type="video/mp4" />
+                    Seu navegador não suporta reprodução de vídeo.
+                  </video>
+                ) : (
+                  <img
+                    src={activeMedia.src}
+                    alt={activeMedia.title}
+                    className="aspect-[16/10] w-full object-cover"
+                  />
+                )}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/45 px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-red-200 backdrop-blur-md">
+                  {isVideo(activeMedia) ? 'Destaque em vídeo' : 'Destaque em foto'}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(true)}
+                  className="absolute right-4 top-4 rounded-full border border-white/10 bg-black/45 px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-white backdrop-blur-md hover:bg-black/65"
+                >
+                  Expandir
+                </button>
+                <div className="absolute bottom-4 left-4 right-4 rounded-[22px] border border-white/10 bg-black/55 p-4 backdrop-blur-xl">
+                  <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{activeMedia.category}</p>
+                      <h3 className="mt-3 text-2xl font-semibold text-white">{activeMedia.title}</h3>
+                      <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{activeMedia.note}</p>
+                    </div>
+                    <div className="rounded-[18px] border border-white/10 bg-white/[0.05] px-4 py-3 sm:text-right">
+                      <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">Formato</p>
+                      <p className="mt-2 text-sm font-medium text-white">
+                        {isVideo(activeMedia) ? 'Vídeo principal' : 'Imagem principal'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="grid gap-4">
+            {mediaGroups.map((group) => (
+              <div key={group.title} className="rounded-[28px] border border-white/10 bg-white/[0.04] p-4">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm uppercase tracking-[0.3em] text-machado-red">{group.title}</p>
+                  <span className="rounded-full border border-white/10 bg-black/30 px-3 py-2 text-[10px] uppercase tracking-[0.28em] text-slate-400">
+                    {group.items.length} itens
+                  </span>
+                </div>
+                <div className="mt-4 grid gap-3">
+                  {group.items.map((item) => {
+                    const selected = activeMedia?.id === item.id
+
+                    return (
+                      <motion.button
+                        key={item.id}
+                        type="button"
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.99 }}
+                        onClick={() => setActiveMedia(item)}
+                        className={`grid gap-4 rounded-[22px] border p-3 text-left transition sm:grid-cols-[96px_1fr] sm:items-center ${
+                          selected
+                            ? 'border-red-500/35 bg-red-500/10'
+                            : 'border-white/10 bg-black/25 hover:border-white/20 hover:bg-white/[0.05]'
+                        }`}
+                      >
+                        <div className="relative h-24 overflow-hidden rounded-[18px] border border-white/10 bg-[#0a0a0a]">
+                          <img
+                            src={item.poster ?? item.src}
+                            alt={item.title}
+                            className="h-full w-full object-cover"
+                          />
+                          {isVideo(item) && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/35">
+                              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-sm text-white backdrop-blur-md">
+                                ▶
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">{item.category}</p>
+                          <p className="mt-2 text-sm font-semibold text-white">{item.title}</p>
+                          <p className="mt-2 text-xs leading-5 text-slate-400">{item.note}</p>
+                        </div>
+                      </motion.button>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      )}
+
+        <div className="relative mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {galleryFocus.map((item) => (
+            <div key={item} className="rounded-[24px] border border-white/10 bg-black/25 px-4 py-5 text-sm leading-6 text-slate-300">
+              {item}
+            </div>
+          ))}
+        </div>
+
+        {activeMedia && isModalOpen && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/88 px-4 py-8 md:p-10"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <div
+              className="relative w-full max-w-5xl rounded-[28px] border border-white/10 bg-[#0d0d0d] p-5 shadow-2xl"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                className="absolute right-5 top-5 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-white transition hover:bg-white/10"
+              >
+                Fechar
+              </button>
+              <div className="rounded-3xl bg-[#050505] p-4">
+                {isVideo(activeMedia) ? (
+                  <video controls className="h-full w-full rounded-3xl bg-black">
+                    <source src={activeMedia.src} type="video/mp4" />
+                    Seu navegador não suporta reprodução de vídeo.
+                  </video>
+                ) : (
+                  <img
+                    src={activeMedia.src}
+                    alt={activeMedia.title}
+                    className="h-full w-full rounded-3xl object-cover"
+                  />
+                )}
+              </div>
+              <div className="mt-4 text-sm text-slate-300">
+                <p className="font-semibold text-white">{activeMedia.title}</p>
+                <p className="mt-2">{activeMedia.note}</p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </section>
   )
 }

@@ -1,8 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" fill="none">
-  <rect width="960" height="640" fill="#080808"/>
-  <rect x="40" y="40" width="880" height="560" rx="28" fill="#141414" stroke="#D3000F" stroke-width="4"/>
-  <path d="M200 520H760" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-  <path d="M200 180H760" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-  <path d="M200 300H760" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-  <text x="480" y="360" fill="#fff" font-family="Inter, sans-serif" font-size="42" font-weight="600" text-anchor="middle">Foto placeholder</text>
+  <rect width="960" height="640" fill="#070707"/>
+  <rect width="960" height="640" fill="url(#bg)"/>
+  <rect x="54" y="52" width="852" height="536" rx="34" fill="#111111" stroke="rgba(255,255,255,0.12)"/>
+  <rect x="88" y="84" width="784" height="472" rx="24" fill="#151515"/>
+  <rect x="88" y="84" width="784" height="472" rx="24" fill="url(#panel)"/>
+  <path d="M126 514H834" stroke="#D3000F" stroke-width="6" stroke-linecap="round"/>
+  <path d="M126 126H834" stroke="white" stroke-opacity="0.08" stroke-width="2"/>
+  <path d="M126 176H834" stroke="white" stroke-opacity="0.08" stroke-width="2"/>
+  <path d="M126 226H834" stroke="white" stroke-opacity="0.08" stroke-width="2"/>
+  <path d="M198 382L306 282L394 350L512 230L658 382H198Z" fill="#FFFFFF" fill-opacity="0.05" stroke="white" stroke-opacity="0.16" stroke-width="3"/>
+  <circle cx="628" cy="212" r="40" fill="#D3000F" fill-opacity="0.26"/>
+  <text x="144" y="146" fill="#D3000F" font-family="Sora, sans-serif" font-size="18" font-weight="700" letter-spacing="6">ACERVO VISUAL</text>
+  <text x="144" y="218" fill="#FFFFFF" font-family="Sora, sans-serif" font-size="46" font-weight="700">Foto em atualização</text>
+  <text x="144" y="270" fill="#A3A3A3" font-family="Sora, sans-serif" font-size="22" font-weight="500">Estrutura pronta para receber imagens reais de frota, pátio e equipe.</text>
+  <rect x="144" y="306" width="232" height="44" rx="22" fill="#D3000F" fill-opacity="0.14" stroke="#D3000F" stroke-opacity="0.35"/>
+  <text x="260" y="334" fill="#FFFFFF" font-family="Sora, sans-serif" font-size="15" font-weight="600" text-anchor="middle">Galeria com destaque principal</text>
+  <defs>
+    <linearGradient id="bg" x1="480" y1="0" x2="480" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#161616"/>
+      <stop offset="1" stop-color="#070707"/>
+    </linearGradient>
+    <radialGradient id="panel" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(820 100) rotate(135) scale(420 620)">
+      <stop stop-color="#D3000F" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#111111" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
 </svg>

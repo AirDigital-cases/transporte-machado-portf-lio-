@@ -25,16 +25,28 @@ function MachadoCertifications() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.7 }}
-      className="rounded-[32px] border border-white/10 bg-[#0b0b0b] p-8 shadow-panel"
+      className="relative h-full overflow-hidden rounded-[32px] border border-white/10 bg-[#0b0b0b] p-6 shadow-panel md:p-8"
     >
-      <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Certificações e Segurança</p>
-      <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        {certifications.map((item) => (
-          <div key={item.title} className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <p className="text-lg font-semibold text-white">{item.title}</p>
-            <p className="mt-3 text-sm leading-7 text-slate-300">{item.description}</p>
-          </div>
-        ))}
+      <div className="absolute inset-0 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),transparent_30%,transparent_75%,rgba(211,0,15,0.08))]" />
+      <div className="relative flex h-full flex-col gap-8">
+        <div>
+          <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Segurança e governança</p>
+          <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
+            Mais credibilidade documental e menos aparência de seção genérica.
+          </h2>
+          <p className="mt-4 max-w-xl text-sm leading-7 text-slate-300">
+            Esta área agora funciona como prova de estrutura e conformidade, reforçando regularização, qualidade e segurança de forma mais elegante e mais fácil de escanear.
+          </p>
+        </div>
+        <div className="grid gap-4">
+          {certifications.map((item) => (
+            <div key={item.title} className="rounded-[26px] border border-white/10 bg-white/[0.05] p-5">
+              <p className="text-[11px] uppercase tracking-[0.32em] text-slate-500">Comprovação</p>
+              <p className="mt-4 text-lg font-semibold text-white">{item.title}</p>
+              <p className="mt-3 text-sm leading-7 text-slate-300">{item.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </motion.section>
   )

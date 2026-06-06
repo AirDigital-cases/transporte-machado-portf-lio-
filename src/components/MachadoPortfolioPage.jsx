@@ -11,52 +11,90 @@ import MachadoMediaGallery from './MachadoMediaGallery'
 import MachadoCTA from './MachadoCTA'
 import FloatingWhatsApp from './FloatingWhatsApp'
 
+const mediaBase = `${import.meta.env.BASE_URL}media/machado`
+
 const videos = [
   {
     id: 'v1',
+    kind: 'video',
+    category: 'Vídeo institucional',
     title: 'Operação em rota',
-    src: '/media/machado/videos/placeholder.mp4',
-    poster: '/media/machado/photos/hero-fallback.svg',
+    note: 'Estrutura pensada para abrir a apresentação com presença, escala e movimento.',
+    src: `${mediaBase}/videos/placeholder.mp4`,
+    poster: `${mediaBase}/photos/hero-fallback.svg`,
   },
   {
     id: 'v2',
+    kind: 'video',
+    category: 'Captação operacional',
     title: 'Movimentação de carga',
-    src: '/media/machado/videos/placeholder.mp4',
-    poster: '/media/machado/photos/hero-fallback.svg',
+    note: 'Espaço pronto para destacar pátio, carregamento e bastidores da operação.',
+    src: `${mediaBase}/videos/placeholder.mp4`,
+    poster: `${mediaBase}/photos/hero-fallback.svg`,
   },
 ]
 
 const photos = [
-  { id: 'p1', title: 'Frota moderna', src: '/media/machado/photos/placeholder.svg' },
-  { id: 'p2', title: 'Operação em pátio', src: '/media/machado/photos/placeholder.svg' },
-  { id: 'p3', title: 'Equipe em ação', src: '/media/machado/photos/placeholder.svg' },
-  { id: 'p4', title: 'Carga pronta para entrega', src: '/media/machado/photos/placeholder.svg' },
+  {
+    id: 'p1',
+    kind: 'photo',
+    category: 'Frota',
+    title: 'Frota moderna',
+    note: 'Área reservada para imagens de caminhões, identidade visual e presença de marca.',
+    src: `${mediaBase}/photos/placeholder.svg`,
+  },
+  {
+    id: 'p2',
+    kind: 'photo',
+    category: 'Operação',
+    title: 'Operação em pátio',
+    note: 'Ideal para mostrar carregamento, docas e organização operacional.',
+    src: `${mediaBase}/photos/placeholder.svg`,
+  },
+  {
+    id: 'p3',
+    kind: 'photo',
+    category: 'Equipe',
+    title: 'Equipe em ação',
+    note: 'Espaço pensado para humanizar a apresentação com bastidores reais.',
+    src: `${mediaBase}/photos/placeholder.svg`,
+  },
+  {
+    id: 'p4',
+    kind: 'photo',
+    category: 'Entrega',
+    title: 'Carga pronta para entrega',
+    note: 'Sequência preparada para valorizar processos, cuidado e acabamento da operação.',
+    src: `${mediaBase}/photos/placeholder.svg`,
+  },
 ]
 
 function MachadoPortfolioPage() {
   return (
-    <div className="min-h-screen overflow-hidden bg-machado-bg text-white">
+    <div className="relative min-h-screen overflow-hidden bg-machado-bg text-white">
       <FloatingWhatsApp />
       <motion.main
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="relative mx-auto flex w-full max-w-[1600px] flex-col gap-16 px-6 pb-20 pt-8 md:px-10 lg:px-14"
+        className="relative mx-auto flex w-full max-w-[1540px] flex-col gap-8 px-4 pb-20 pt-4 sm:px-6 md:gap-10 md:px-10 md:pt-8 xl:px-14"
       >
-        <MachadoHero />
-        <section className="grid gap-16">
-          <div className="space-y-12">
-            <MachadoAbout />
-            <MachadoNumbers />
-            <MachadoServices />
-            <MachadoDifferentials />
-            <MachadoCertifications />
-            <MachadoProcess />
-            <MachadoEquipmentRental />
-            <MachadoMediaGallery videos={videos} photos={photos} />
-          </div>
-          <MachadoCTA />
+        <MachadoHero featuredVideo={videos[0]} />
+        <section className="grid gap-8 xl:grid-cols-[1.08fr_0.92fr]">
+          <MachadoAbout />
+          <MachadoNumbers />
         </section>
+        <MachadoServices />
+        <section className="grid gap-8 xl:grid-cols-[0.98fr_1.02fr]">
+          <MachadoDifferentials />
+          <MachadoProcess />
+        </section>
+        <section className="grid gap-8 xl:grid-cols-[1.08fr_0.92fr]">
+          <MachadoEquipmentRental />
+          <MachadoCertifications />
+        </section>
+        <MachadoMediaGallery videos={videos} photos={photos} />
+        <MachadoCTA />
       </motion.main>
     </div>
   )

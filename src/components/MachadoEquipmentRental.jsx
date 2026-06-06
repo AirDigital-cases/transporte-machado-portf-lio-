@@ -1,5 +1,35 @@
 import { motion } from 'framer-motion'
 
+const rentalBenefits = [
+  'Mais praticidade',
+  'Menos burocracia',
+  'Equipamentos prontos para uso',
+  'Economia inteligente para sua empresa',
+]
+
+const rentalCapabilities = [
+  {
+    title: 'Empilhadeiras de diversas capacidades',
+    description:
+      'Estrutura preparada para atender operações industriais, armazenagem e movimentação de cargas com flexibilidade.',
+  },
+  {
+    title: 'Modelo de 7 toneladas com sistema clamp',
+    description:
+      'Equipamento especializado para movimentação segura de bobinas de papel e cargas sensíveis.',
+  },
+  {
+    title: 'Equipamentos modernos e revisados',
+    description:
+      'Disponibilidade com foco em alto desempenho operacional e segurança na rotina logística.',
+  },
+  {
+    title: 'Atendimento ágil e suporte técnico',
+    description:
+      'Soluções sob medida para operações industriais e logísticas com resposta rápida quando necessário.',
+  },
+]
+
 function MachadoEquipmentRental() {
   return (
     <motion.section
@@ -7,37 +37,33 @@ function MachadoEquipmentRental() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.7 }}
-      className="grid gap-10 rounded-[32px] border border-white/10 bg-[#0b0b0b] p-8 shadow-panel lg:grid-cols-2"
+      className="relative h-full overflow-hidden rounded-[32px] border border-white/10 bg-[#0b0b0b] p-6 shadow-panel md:p-8"
     >
-      <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-        <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Locação de Máquinas e Equipamentos</p>
-        <h2 className="mt-4 text-2xl font-semibold text-white">Locação de Máquinas e Equipamentos</h2>
-        <p className="mt-5 text-sm leading-7 text-slate-300">
-          Com a nossa locação de máquinas e equipamentos, você reduz custos, evita manutenção inesperada e garante alta performance para sua operação.
-        </p>
-        <ul className="mt-6 space-y-3 text-slate-300">
-          <li>• Mais praticidade</li>
-          <li>• Menos burocracia</li>
-          <li>• Equipamentos prontos para uso</li>
-          <li>• Economia inteligente para sua empresa</li>
-        </ul>
-      </div>
+      <div className="absolute inset-0 bg-[linear-gradient(160deg,rgba(255,255,255,0.04),transparent_30%,transparent_75%,rgba(211,0,15,0.08))]" />
+      <div className="relative grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
+        <div className="rounded-[28px] border border-white/10 bg-white/[0.04] p-6">
+          <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Locação de máquinas e equipamentos</p>
+          <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">Linha de apoio para operações que precisam de estrutura além do transporte.</h2>
+          <p className="mt-5 text-sm leading-7 text-slate-300">
+            Com a locação de máquinas e equipamentos, a Machado amplia a leitura de capacidade operacional: reduz custos, evita manutenção inesperada e garante mais performance para clientes com demandas logísticas mais complexas.
+          </p>
+          <div className="mt-6 grid gap-3">
+            {rentalBenefits.map((item) => (
+              <div key={item} className="rounded-[22px] border border-white/10 bg-black/30 px-4 py-4 text-sm leading-6 text-slate-300">
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
 
-      <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-        <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Estrutura Completa</p>
-        <h2 className="mt-4 text-2xl font-semibold text-white">Estrutura completa</h2>
-        <p className="mt-5 text-sm leading-7 text-slate-300">
-          A Machado Transportadora também conta com estrutura completa para locação de máquinas e equipamentos logísticos, oferecendo soluções eficientes para operações industriais, armazenagem e movimentação de cargas.
-        </p>
-        <p className="mt-6 text-sm leading-7 text-slate-300">
-          Disponibilizamos empilhadeiras de diversas capacidades, incluindo equipamentos especializados como empilhadeira de 7 toneladas com sistema clamp, ideal para movimentação segura de bobinas de papel e cargas sensíveis.
-        </p>
-        <div className="mt-6 rounded-3xl border border-white/10 bg-[#101010] p-4 text-sm text-slate-300">
-          <p>Equipamentos modernos e revisados</p>
-          <p>Alto desempenho operacional</p>
-          <p>Segurança na movimentação de cargas</p>
-          <p>Atendimento ágil e suporte técnico</p>
-          <p>Soluções sob medida para operações industriais e logísticas</p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {rentalCapabilities.map((item) => (
+            <div key={item.title} className="rounded-[26px] border border-white/10 bg-[#101010] p-5">
+              <p className="text-[11px] uppercase tracking-[0.32em] text-slate-500">Estrutura</p>
+              <p className="mt-4 text-lg font-semibold text-white">{item.title}</p>
+              <p className="mt-3 text-sm leading-7 text-slate-300">{item.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </motion.section>
