@@ -32,10 +32,10 @@ function MachadoCertifications() {
         <div>
           <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Segurança e governança</p>
           <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-            Mais credibilidade documental e menos aparência de seção genérica.
+            Seguranca, regularizacao e confianca
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-7 text-slate-300">
-            Esta área agora funciona como prova de estrutura e conformidade, reforçando regularização, qualidade e segurança de forma mais elegante e mais fácil de escanear.
+            A Machado atua com responsabilidade operacional, regularizacao e processos que reforcam a seguranca de cada transporte.
           </p>
         </div>
         <div className="grid gap-4">

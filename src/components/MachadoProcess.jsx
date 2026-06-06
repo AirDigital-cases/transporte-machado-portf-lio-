@@ -5,19 +5,19 @@ const steps = [
     step: '1',
     title: 'Solicitação da cotação',
     description:
-      'Cliente informa origem, destino e características da carga. Resposta rápida em até 10 minutos.',
+      'Cliente informa origem, destino e caracteristicas da carga. Nossa equipe analisa a melhor solucao logistica.',
   },
   {
     step: '2',
     title: 'Coleta da mercadoria',
     description:
-      'Agendamento flexível e execução segura da coleta com equipe treinada e preparada.',
+      'Agendamento flexivel e coleta realizada com equipe preparada para garantir seguranca desde o inicio.',
   },
   {
     step: '3',
     title: 'Transporte e entrega',
     description:
-      'Entrega no prazo acordado com acompanhamento operacional full time.',
+      'Entrega no prazo acordado, com acompanhamento operacional e suporte durante todo o trajeto.',
   },
 ]
 
@@ -36,7 +36,7 @@ function MachadoProcess() {
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Processo operacional</p>
             <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-              Fluxo em 3 etapas com leitura mais visual e mais profissional.
+              Da cotacao a entrega: uma operacao acompanhada de ponta a ponta
             </h2>
           </div>
         </div>

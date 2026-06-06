@@ -20,11 +20,11 @@ function MachadoNumbers() {
       <div className="relative">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Escala operacional</p>
-            <h2 className="mt-3 text-3xl font-semibold text-white">Números que sustentam a narrativa</h2>
+            <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Resultados</p>
+            <h2 className="mt-3 text-3xl font-semibold text-white">Resultados que comprovam nossa autoridade</h2>
           </div>
           <p className="max-w-sm text-sm leading-6 text-slate-400">
-            Indicadores apresentados em formato mais editorial, com leitura rápida e hierarquia mais forte no mobile e no desktop.
+            Cada numero representa a confianca de empresas que contam com a Machado para manter suas operacoes em movimento.
           </p>
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2">

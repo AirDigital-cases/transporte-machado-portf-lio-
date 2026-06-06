@@ -1,15 +1,15 @@
 import { motion } from 'framer-motion'
 
 const heroStats = [
-  { label: 'Cobertura', value: 'Sul, Sudeste e Centro-Oeste' },
-  { label: 'Modelos', value: 'Carga fechada, fracionada e locação' },
-  { label: 'Ritmo comercial', value: 'Apresentação preparada para vender' },
+  { label: 'Atuação', value: 'Sul, Sudeste e Centro-Oeste' },
+  { label: 'Soluções', value: 'Carga fechada, fracionada e logística regional' },
+  { label: 'Compromisso', value: 'Segurança, agilidade e previsibilidade' },
 ]
 
 const heroProofs = [
-  'Presença visual forte para propostas comerciais',
-  'Organização pensada para exibir operação real',
-  'Narrativa premium com base em logística e performance',
+  'Transporte de cargas com operação real',
+  'Estrutura preparada para demandas de pequeno, médio e grande porte',
+  'Atendimento empresarial com foco em confiança e performance',
 ]
 
 function MachadoHero({ featuredVideo }) {
@@ -32,11 +32,14 @@ function MachadoHero({ featuredVideo }) {
             <div className="space-y-4">
               <p className="text-xs uppercase tracking-[0.38em] text-slate-500">Machado Transportes</p>
               <h1 className="max-w-4xl text-4xl font-semibold leading-[0.95] text-white sm:text-5xl xl:text-7xl">
-                Presença operacional forte para uma marca de logística que quer parecer grande em cada detalhe.
+                Movimentamos cargas. Entregamos confianca.
               </h1>
             </div>
             <p className="max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
-              Uma landing pensada como vitrine comercial: estrutura, confiança e capacidade apresentadas com linguagem visual premium, mantendo a identidade preta, branca e vermelha da Machado.
+              Solucoes inteligentes em transporte e logistica para empresas que precisam de seguranca, agilidade e previsibilidade em cada entrega.
+            </p>
+            <p className="max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
+              A Machado Transportes conecta operacoes, regioes e negocios atraves de uma estrutura preparada para atender demandas de pequeno, medio e grande porte.
             </p>
           </div>
 
@@ -62,10 +65,10 @@ function MachadoHero({ featuredVideo }) {
               href="#galeria"
               className="inline-flex w-full items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white hover:border-white/20 hover:bg-white/10 sm:w-auto"
             >
-              Ver área de mídia
+              Conhecer operacao
             </a>
             <span className="inline-flex items-center rounded-full border border-white/10 bg-black/30 px-4 py-3 text-sm text-slate-300">
-              Instagram: @machado.transporte
+              Carga fechada, carga fracionada e logistica regional
             </span>
           </div>
 
@@ -98,7 +101,7 @@ function MachadoHero({ featuredVideo }) {
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
             <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/45 px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-red-200 backdrop-blur-md">
-              Captação principal
+              Operacao real
             </div>
             <div className="absolute bottom-4 left-4 right-4 rounded-[24px] border border-white/10 bg-black/55 p-4 backdrop-blur-xl">
               <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-end">
@@ -108,8 +111,8 @@ function MachadoHero({ featuredVideo }) {
                   <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{featuredVideo.note}</p>
                 </div>
                 <div className="rounded-[22px] border border-white/10 bg-white/[0.05] px-4 py-4 sm:text-right">
-                  <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">Formato</p>
-                  <p className="mt-2 text-sm font-medium leading-6 text-white">Hero com vídeo + galeria pronta para expansão</p>
+                  <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">Especialidades</p>
+                  <p className="mt-2 text-sm font-medium leading-6 text-white">Carga fechada, carga fracionada e logistica regional</p>
                 </div>
               </div>
             </div>
@@ -117,16 +120,16 @@ function MachadoHero({ featuredVideo }) {
 
           <div className="grid gap-3 sm:grid-cols-3">
             <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-4">
-              <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">Impacto</p>
-              <p className="mt-3 text-sm leading-6 text-white">Primeira dobra com mais contraste, escala e presença.</p>
+              <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">Seguranca</p>
+              <p className="mt-3 text-sm leading-6 text-white">Operacao estruturada para proteger cada carga do inicio ao fim.</p>
             </div>
             <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-4">
-              <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">Conteúdo</p>
-              <p className="mt-3 text-sm leading-6 text-white">Espaços preparados para vídeo hero, bastidores e frota.</p>
+              <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">Agilidade</p>
+              <p className="mt-3 text-sm leading-6 text-white">Prazos competitivos e respostas alinhadas ao ritmo da sua empresa.</p>
             </div>
             <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-4">
-              <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">Posicionamento</p>
-              <p className="mt-3 text-sm leading-6 text-white">Visual mais próximo de portfólio profissional do que site genérico.</p>
+              <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">Previsibilidade</p>
+              <p className="mt-3 text-sm leading-6 text-white">Mais controle operacional e acompanhamento em cada entrega.</p>
             </div>
           </div>
         </motion.div>

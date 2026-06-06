@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
 
 const aboutHighlights = [
-  'Equipe qualificada e atendimento próximo',
-  'Frota, processos e comunicação alinhados',
-  'Apresentação comercial com mais percepção de valor',
+  'Transporte de cargas',
+  'Logistica regional',
+  'Suporte operacional',
 ]
 
 function MachadoAbout() {
@@ -20,10 +20,13 @@ function MachadoAbout() {
         <div className="space-y-5">
           <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Perfil operacional</p>
           <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl">
-            A apresentação agora comunica estrutura, segurança e maturidade operacional com mais clareza.
+            Sobre a Machado Transportes
           </h2>
           <p className="max-w-xl text-sm leading-7 text-slate-300 sm:text-base">
-            A Machado deixa de parecer apenas um site institucional e passa a se posicionar como uma operação logística robusta, com narrativa visual preparada para convencer clientes, parceiros e equipes comerciais.
+            A Machado Transportes oferece solucoes completas para transporte de cargas, logistica regional, movimentacao industrial e suporte operacional.
+          </p>
+          <p className="max-w-xl text-sm leading-7 text-slate-300 sm:text-base">
+            Nossa operacao foi estruturada para atender empresas que precisam de seguranca, agilidade e confianca em cada etapa da entrega. Com equipe qualificada, frota preparada e processos bem definidos, transformamos desafios logisticos em operacoes mais eficientes.
           </p>
           <div className="grid gap-3">
             {aboutHighlights.map((item) => (
@@ -37,23 +40,23 @@ function MachadoAbout() {
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-[26px] border border-white/10 bg-white/[0.04] p-5 sm:col-span-2">
             <p className="text-[11px] uppercase tracking-[0.32em] text-slate-500">Leitura de marca</p>
-            <p className="mt-4 text-lg font-semibold text-white">Operação conectada à necessidade de cada cliente</p>
+            <p className="mt-4 text-lg font-semibold text-white">Operacao conectada a necessidade de cada cliente</p>
             <p className="mt-3 text-sm leading-7 text-slate-300">
-              Oferecemos soluções inteligentes em transporte e logística, com agilidade, segurança e compromisso em cada entrega. A construção visual agora reforça esses atributos com mais profundidade e melhor ritmo entre texto, prova e mídia.
+              Seguranca, agilidade e confianca nao aparecem apenas no discurso: fazem parte da forma como planejamos, executamos e acompanhamos cada transporte.
             </p>
           </div>
           <div className="rounded-[26px] border border-white/10 bg-[#101010] p-5">
-            <p className="text-[11px] uppercase tracking-[0.32em] text-slate-500">Atendimento</p>
-            <p className="mt-4 text-base font-semibold text-white">Contato humanizado</p>
+            <p className="text-[11px] uppercase tracking-[0.32em] text-slate-500">Equipe</p>
+            <p className="mt-4 text-base font-semibold text-white">Equipe qualificada</p>
             <p className="mt-3 text-sm leading-7 text-slate-300">
-              Nossa operação é estruturada para garantir excelência operacional e atendimento humanizado.
+              Atendimento empresarial com suporte proximo e foco em execucao segura.
             </p>
           </div>
           <div className="rounded-[26px] border border-white/10 bg-[#101010] p-5">
-            <p className="text-[11px] uppercase tracking-[0.32em] text-slate-500">Capacidade</p>
-            <p className="mt-4 text-base font-semibold text-white">Frota e processos otimizados</p>
+            <p className="text-[11px] uppercase tracking-[0.32em] text-slate-500">Operacao</p>
+            <p className="mt-4 text-base font-semibold text-white">Frota preparada e processos bem definidos</p>
             <p className="mt-3 text-sm leading-7 text-slate-300">
-              Equipe qualificada, frota moderna e processos desenhados para atender demandas com previsibilidade.
+              Estrutura pensada para atender demandas com previsibilidade, controle e confianca.
             </p>
           </div>
         </div>

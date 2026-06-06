@@ -3,9 +3,9 @@ import { motion } from 'framer-motion'
 
 const galleryFocus = [
   'Frota e identidade visual',
-  'Pátio, carregamento e docas',
-  'Equipe, processos e bastidores',
-  'Entregas, operação e confiança',
+  'Equipe e operacao real',
+  'Armazenagem e movimentacao de cargas',
+  'Entregas com seguranca e precisao',
 ]
 
 function isVideo(media) {
@@ -32,11 +32,11 @@ function MachadoMediaGallery({ videos, photos }) {
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Portfólio de mídia</p>
             <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-              Área de fotos e vídeos com estrutura de showcase, não apenas uma grade de thumbnails.
+              Nossa operacao em movimento
             </h2>
           </div>
           <p className="max-w-2xl text-sm leading-6 text-slate-400">
-            A galeria agora prioriza um destaque principal, organização por tipo de conteúdo e uma base pronta para receber captações reais da operação.
+            Fotos e videos reais da rotina Machado: frota, equipe, armazenagem, movimentacao de cargas e entregas. Cada registro mostra a estrutura, o cuidado e a precisao que sustentam nossas operacoes.
           </p>
         </div>
 
@@ -58,7 +58,7 @@ function MachadoMediaGallery({ videos, photos }) {
                 )}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
                 <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/45 px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-red-200 backdrop-blur-md">
-                  {isVideo(activeMedia) ? 'Destaque em vídeo' : 'Destaque em foto'}
+                  {isVideo(activeMedia) ? 'Video em destaque' : 'Foto em destaque'}
                 </div>
                 <button
                   type="button"
@@ -75,9 +75,9 @@ function MachadoMediaGallery({ videos, photos }) {
                       <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{activeMedia.note}</p>
                     </div>
                     <div className="rounded-[18px] border border-white/10 bg-white/[0.05] px-4 py-3 sm:text-right">
-                      <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">Formato</p>
+                      <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">Registro</p>
                       <p className="mt-2 text-sm font-medium text-white">
-                        {isVideo(activeMedia) ? 'Vídeo principal' : 'Imagem principal'}
+                        {isVideo(activeMedia) ? 'Operacao em video' : 'Operacao em imagem'}
                       </p>
                     </div>
                   </div>

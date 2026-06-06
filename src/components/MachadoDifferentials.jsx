@@ -4,17 +4,17 @@ const differentials = [
   {
     title: 'Pontualidade',
     description:
-      'Entregas dentro dos prazos acordados com compromisso total e monitoramento constante das rotas.',
+      'Planejamento logistico e acompanhamento constante para cumprir prazos com responsabilidade.',
   },
   {
     title: 'Segurança',
     description:
-      'Operação com seguro de carga completo e regularização total para sua tranquilidade.',
+      'Operacao regularizada, carga segurada e processos de controle para proteger cada entrega.',
   },
   {
     title: 'Transparência',
     description:
-      'Comunicação clara e acompanhamento em tempo real de todas as entregas.',
+      'Comunicacao clara, suporte proximo e acompanhamento em todas as etapas da operacao.',
   },
 ]
 
@@ -32,7 +32,7 @@ function MachadoDifferentials() {
         <div>
           <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Diferenciais competitivos</p>
           <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-            Três mensagens-chave para aumentar confiança sem poluir a leitura.
+            Por que empresas escolhem a Machado?
           </h2>
         </div>
         <div className="grid gap-4">
@@ -49,7 +49,7 @@ function MachadoDifferentials() {
           ))}
         </div>
         <div className="rounded-[24px] border border-white/10 bg-black/30 px-5 py-5 text-sm leading-7 text-slate-300">
-          O ganho aqui é de percepção: o visitante entende rápido que a Machado combina pontualidade, segurança e comunicação clara, com menos sensação de blocos repetidos.
+          Pontualidade, seguranca e transparencia fazem parte da base operacional que sustenta cada entrega.
         </div>
       </div>
     </motion.section>

@@ -14,10 +14,10 @@ function MachadoCTA() {
         <div>
           <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Próximo passo comercial</p>
           <h2 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight text-white sm:text-4xl">
-            A base visual está pronta para apresentar a Machado como uma operação mais premium, mais organizada e mais vendável.
+            Sua operacao merece uma logistica a altura do seu crescimento.
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300">
-            Se quiser, a próxima iteração pode aprofundar acervo real, provas sociais, clientes atendidos e uma galeria ainda mais cinematográfica sem quebrar a estrutura que já ficou pronta aqui.
+            A Machado Transportes esta preparada para desenvolver solucoes logisticas sob medida para sua empresa, com seguranca, agilidade e suporte especializado.
           </p>
         </div>
         <div className="grid gap-3">
@@ -27,26 +27,24 @@ function MachadoCTA() {
             rel="noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-machado-red px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white shadow-[0_18px_40px_rgba(211,0,15,0.28)] hover:bg-[#eb0b1b]"
           >
-            Solicite uma cotação no WhatsApp
+            Solicitar cotacao
           </a>
           <a
-            href="https://instagram.com/machado.transporte"
+            href="#galeria"
+            className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white hover:border-white/20 hover:bg-white/10"
+          >
+            Conhecer operacao
+          </a>
+          <a
+            href="https://machadotransportadora.com.br"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white hover:border-white/20 hover:bg-white/10"
           >
-            Instagram
-          </a>
-          <a
-            href="https://www.machadotransportadora.com.br"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white hover:border-white/20 hover:bg-white/10"
-          >
-            Site oficial
+            Acessar site oficial
           </a>
           <div className="rounded-[24px] border border-white/10 bg-black/30 px-5 py-4 text-sm leading-6 text-slate-300">
-            Visual premium, identidade coerente e estrutura de portfólio pronta para evoluir com fotos e vídeos reais.
+            Seguranca, agilidade e suporte especializado para operacoes sob medida.
           </div>
         </div>
       </div>

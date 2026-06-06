@@ -2,14 +2,14 @@ import { motion } from 'framer-motion'
 
 const serviceBlocks = [
   {
-    title: 'Cobertura estratégica',
+    title: 'Atuacao estrategica',
     description:
-      'Atendemos as regiões Sul, Sudeste e Centro-Oeste com rotas otimizadas e leitura operacional mais clara para o cliente.',
+      'Atuamos de forma estrategica nas regioes Sul, Sudeste e Centro-Oeste, com rotas otimizadas, prazos competitivos e uma operacao preparada para acompanhar o ritmo da sua empresa.',
   },
   {
-    title: 'Agilidade logística',
+    title: 'Controle e previsibilidade',
     description:
-      'Ideal para empresas que precisam de distribuição eficiente, prazos curtos e flexibilidade para demandas recorrentes.',
+      'Nossa logistica regional garante mais controle, previsibilidade e eficiencia para empresas que precisam distribuir cargas com seguranca e agilidade.',
   },
 ]
 
@@ -18,19 +18,19 @@ const closedLoadCards = [
     eyebrow: 'Carga Fechada',
     title: 'Exclusividade',
     description:
-      'Operação dedicada com caminhão exclusivo para sua empresa. Atendimento personalizado que garante total controle sobre sua carga.',
+      'Veiculo dedicado para sua empresa, garantindo controle total da carga desde a coleta ate a entrega.',
   },
   {
     eyebrow: 'Carga Fechada',
     title: 'Agilidade',
     description:
-      'Rotas diretas e otimizadas, sem paradas intermediárias. Redução significativa no tempo de trânsito.',
+      'Rotas diretas e otimizadas, sem paradas intermediarias, reduzindo o tempo de transito da operacao.',
   },
   {
     eyebrow: 'Carga Fechada',
     title: 'Segurança',
     description:
-      'Proteção máxima para cargas volumosas e de alto valor. Monitoramento completo e seguro de carga incluso em toda operação.',
+      'Monitoramento, seguro de carga e cuidado operacional para mercadorias volumosas, sensiveis ou de alto valor.',
   },
 ]
 
@@ -39,35 +39,35 @@ const partialLoadCards = [
     eyebrow: 'Carga Fracionada',
     title: 'Flexibilidade',
     description:
-      'Ideal para pequenas e médias cargas que não exigem caminhão exclusivo.',
+      'Compartilhamento inteligente de espaco, adaptado ao volume e a necessidade da sua operacao.',
   },
   {
     eyebrow: 'Carga Fracionada',
     title: 'Economia',
     description:
-      'Reduza custos logísticos pagando apenas pelo volume transportado.',
+      'Reducao de custos logisticos ao pagar apenas pelo espaco utilizado no transporte.',
   },
   {
     eyebrow: 'Carga Fracionada',
     title: 'Agilidade',
     description:
-      'Rotas otimizadas e frequência regular de coletas garantem entregas rápidas mesmo para volumes menores.',
+      'Rotas planejadas e frequencia operacional para manter entregas rapidas, seguras e eficientes.',
   },
 ]
 
 const operationModes = [
   {
     eyebrow: 'Carga Fechada',
-    title: 'Operação dedicada para cargas que pedem exclusividade',
+    title: 'Carga Fechada',
     description:
-      'Modelo indicado para volumes maiores, mercadorias sensíveis e rotas em que o tempo de trânsito impacta diretamente a operação do cliente.',
+      'Solucao dedicada para operacoes que exigem exclusividade, controle e seguranca maxima durante todo o transporte.',
     cards: closedLoadCards,
   },
   {
     eyebrow: 'Carga Fracionada',
-    title: 'Distribuição flexível com melhor equilíbrio entre custo e velocidade',
+    title: 'Carga Fracionada',
     description:
-      'Formato preparado para empresas que precisam de frequência, eficiência e controle de investimento logístico sem abrir mão de performance.',
+      'Ideal para empresas que precisam transportar pequenas e medias cargas sem contratar um veiculo exclusivo.',
     cards: partialLoadCards,
   },
 ]
@@ -121,10 +121,10 @@ function MachadoServices() {
           <div className="rounded-[28px] border border-white/10 bg-white/[0.04] p-6">
             <p className="text-sm uppercase tracking-[0.3em] text-machado-red">Frentes de operação</p>
             <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-              Serviços apresentados como soluções comerciais, não como blocos genéricos.
+              Transporte Regional
             </h2>
             <p className="mt-5 text-sm leading-7 text-slate-300">
-              Reestruturei esta área para deixar mais evidente o que a Machado entrega, como opera e em quais cenários gera valor. Isso melhora leitura, sofisticação e a percepção de especialidade.
+              Atuamos de forma estrategica nas regioes Sul, Sudeste e Centro-Oeste, com rotas otimizadas, prazos competitivos e uma operacao preparada para acompanhar o ritmo da sua empresa.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
