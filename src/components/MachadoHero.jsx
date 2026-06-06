@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+
+const heroLogoPath = `${import.meta.env.BASE_URL}media/machado/logo/logo-machado.png`
 
 const heroStats = [
   { label: 'Atuação', value: 'Sul, Sudeste e Centro-Oeste' },
@@ -12,7 +15,33 @@ const heroProofs = [
   'Atendimento empresarial com foco em confiança e performance',
 ]
 
+function SafeVideo({ src, fallbackSrc, poster, className, ...props }) {
+  const [currentSrc, setCurrentSrc] = useState(src)
+
+  useEffect(() => {
+    setCurrentSrc(src)
+  }, [src])
+
+  return (
+    <video
+      {...props}
+      key={currentSrc}
+      className={className}
+      poster={poster}
+      onError={() => {
+        if (fallbackSrc && currentSrc !== fallbackSrc) {
+          setCurrentSrc(fallbackSrc)
+        }
+      }}
+    >
+      <source src={currentSrc} type="video/mp4" />
+    </video>
+  )
+}
+
 function MachadoHero({ featuredVideo }) {
+  const [showLogo, setShowLogo] = useState(true)
+
   return (
     <section className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[#090909] px-5 pb-5 pt-6 shadow-panel md:px-8 md:pb-8 md:pt-8 xl:px-10 xl:pb-10">
       <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(211,0,15,0.14),transparent_24%,transparent_60%,rgba(255,255,255,0.04)_100%)]" />
@@ -30,7 +59,16 @@ function MachadoHero({ featuredVideo }) {
               Portfólio digital logístico
             </span>
             <div className="space-y-4">
-              <p className="text-xs uppercase tracking-[0.38em] text-slate-500">Machado Transportes</p>
+              {showLogo ? (
+                <img
+                  src={heroLogoPath}
+                  alt="Logo oficial da Machado Transportes"
+                  onError={() => setShowLogo(false)}
+                  className="h-auto w-full max-w-[160px] object-contain sm:max-w-[210px] xl:max-w-[240px]"
+                />
+              ) : (
+                <p className="text-xs uppercase tracking-[0.38em] text-slate-500">Machado Transportes</p>
+              )}
               <h1 className="max-w-4xl text-4xl font-semibold leading-[0.95] text-white sm:text-5xl xl:text-7xl">
                 Movimentamos cargas. Entregamos confianca.
               </h1>
@@ -89,16 +127,16 @@ function MachadoHero({ featuredVideo }) {
         >
           <div className="relative overflow-hidden rounded-[30px] border border-white/10 bg-[#121212] shadow-panel">
             <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent" />
-            <video
+            <SafeVideo
               className="h-full min-h-[360px] w-full object-cover"
               autoPlay
               muted
               loop
               playsInline
+              src={featuredVideo.src}
+              fallbackSrc={featuredVideo.fallbackSrc}
               poster={featuredVideo.poster}
-            >
-              <source src={featuredVideo.src} type="video/mp4" />
-            </video>
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
             <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/45 px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-red-200 backdrop-blur-md">
               Operacao real

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const galleryFocus = [
@@ -10,6 +10,31 @@ const galleryFocus = [
 
 function isVideo(media) {
   return media?.kind === 'video' || media?.src?.endsWith('.mp4')
+}
+
+function SafeVideoPlayer({ src, fallbackSrc, poster, className, ...props }) {
+  const [currentSrc, setCurrentSrc] = useState(src)
+
+  useEffect(() => {
+    setCurrentSrc(src)
+  }, [src])
+
+  return (
+    <video
+      {...props}
+      key={currentSrc}
+      className={className}
+      poster={poster}
+      onError={() => {
+        if (fallbackSrc && currentSrc !== fallbackSrc) {
+          setCurrentSrc(fallbackSrc)
+        }
+      }}
+    >
+      <source src={currentSrc} type="video/mp4" />
+      Seu navegador nao suporta reproducao de video.
+    </video>
+  )
 }
 
 function MachadoMediaGallery({ videos, photos }) {
@@ -45,10 +70,13 @@ function MachadoMediaGallery({ videos, photos }) {
             {activeMedia && (
               <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-black">
                 {isVideo(activeMedia) ? (
-                  <video controls poster={activeMedia.poster} className="aspect-[16/10] w-full object-cover">
-                    <source src={activeMedia.src} type="video/mp4" />
-                    Seu navegador não suporta reprodução de vídeo.
-                  </video>
+                  <SafeVideoPlayer
+                    controls
+                    poster={activeMedia.poster}
+                    src={activeMedia.src}
+                    fallbackSrc={activeMedia.fallbackSrc}
+                    className="aspect-[16/10] w-full object-cover"
+                  />
                 ) : (
                   <img
                     src={activeMedia.src}
@@ -65,7 +93,7 @@ function MachadoMediaGallery({ videos, photos }) {
                   onClick={() => setIsModalOpen(true)}
                   className="absolute right-4 top-4 rounded-full border border-white/10 bg-black/45 px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-white backdrop-blur-md hover:bg-black/65"
                 >
-                  Expandir
+                  {isVideo(activeMedia) ? 'Assistir video' : 'Expandir'}
                 </button>
                 <div className="absolute bottom-4 left-4 right-4 rounded-[22px] border border-white/10 bg-black/55 p-4 backdrop-blur-xl">
                   <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
@@ -106,7 +134,7 @@ function MachadoMediaGallery({ videos, photos }) {
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                         onClick={() => setActiveMedia(item)}
-                        className={`grid gap-4 rounded-[22px] border p-3 text-left transition sm:grid-cols-[96px_1fr] sm:items-center ${
+                        className={`grid gap-4 rounded-[22px] border p-3 text-left transition hover:-translate-y-0.5 sm:grid-cols-[96px_1fr] sm:items-center ${
                           selected
                             ? 'border-red-500/35 bg-red-500/10'
                             : 'border-white/10 bg-black/25 hover:border-white/20 hover:bg-white/[0.05]'
@@ -130,6 +158,9 @@ function MachadoMediaGallery({ videos, photos }) {
                           <p className="text-[11px] uppercase tracking-[0.28em] text-slate-500">{item.category}</p>
                           <p className="mt-2 text-sm font-semibold text-white">{item.title}</p>
                           <p className="mt-2 text-xs leading-5 text-slate-400">{item.note}</p>
+                          <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-red-200">
+                            {isVideo(item) ? 'Assistir video' : 'Ver imagem'}
+                          </p>
                         </div>
                       </motion.button>
                     )
@@ -166,10 +197,13 @@ function MachadoMediaGallery({ videos, photos }) {
               </button>
               <div className="rounded-3xl bg-[#050505] p-4">
                 {isVideo(activeMedia) ? (
-                  <video controls className="h-full w-full rounded-3xl bg-black">
-                    <source src={activeMedia.src} type="video/mp4" />
-                    Seu navegador não suporta reprodução de vídeo.
-                  </video>
+                  <SafeVideoPlayer
+                    controls
+                    src={activeMedia.src}
+                    fallbackSrc={activeMedia.fallbackSrc}
+                    poster={activeMedia.poster}
+                    className="h-full w-full rounded-3xl bg-black"
+                  />
                 ) : (
                   <img
                     src={activeMedia.src}
